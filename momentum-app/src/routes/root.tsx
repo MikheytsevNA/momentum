@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./../index.css";
-import Weather from "./../blocks/weater";
+import Weather from "../blocks/weather";
 
 export default function Root() {
   return (
