@@ -4,6 +4,7 @@ export type WeatherResponseOK = {
   temp: string;
   windSpeed: string;
   humidity: string;
+  description: string;
 };
 
 export type WeatherResponseFail = {
@@ -46,6 +47,7 @@ export async function fetchWeather(city: string): Promise<WeatherResponse> {
       temp: Math.round(result.main.temp).toString() + "°C",
       windSpeed: Math.round(result.wind.speed).toString(),
       humidity: Math.round(result.main.humidity).toString() + "%",
+      description: result.weather[0].description,
     };
   } catch (error) {
     console.warn(error);
