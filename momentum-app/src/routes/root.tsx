@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./../index.css";
 import Weather from "../blocks/weather";
+import DateLine from "../blocks/date";
+import Time from "../blocks/time";
+import Greeting from "../blocks/greeting";
 
 export default function Root() {
   return (
@@ -10,9 +13,9 @@ export default function Root() {
         <div className="weather">{Weather()}</div>
       </header>
       <main className="main">
-        <div className="time"></div>
-        <div className="date"></div>
-        <div className="greeting"></div>
+        <div className="time">{Time()}</div>
+        <div className="date">{DateLine()}</div>
+        <div className="greeting-container">{Greeting()}</div>
       </main>
       <footer className="footer">
         <div className="settings"></div>

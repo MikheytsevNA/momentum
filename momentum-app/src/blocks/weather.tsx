@@ -8,25 +8,12 @@ import {
 import { debounce } from "./debounce";
 import { useDebounce } from "./use-debounce";
 
-const debounced = debounce(fetchWeather, 300); //debouncing api
+//const debounced = debounce(fetchWeather, 300); //debouncing api
 
 export default function Weather() {
   const [city, setCity] = useState("Novi Sad");
   const [data, setData] = useState<WeatherResponse | null>(null);
   const debouncedCity = useDebounce(city, 300); //debouncing city
-
-  /* const [debouncedCity, setDebouncedValue] = useState(city);
-  
-  useEffect(() => {
-    //unpacked hook
-    const handler = setTimeout(() => {
-      setDebouncedValue(city);
-    }, 300);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [city]); */
 
   useEffect(() => {
     const getWeatherData = async (city: string) => {
