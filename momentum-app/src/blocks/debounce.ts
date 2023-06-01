@@ -3,7 +3,7 @@ export function debounce<A extends (...args: any[]) => any>(
   func: A,
   delay = 300
 ) {
-  let timer: number;
+  let timer: NodeJS.Timeout;
   return function (...arg: Parameters<A>) {
     return new Promise<ReturnType<A>>((resolve) => {
       //pending promises are not deleted
@@ -16,7 +16,7 @@ export function debounce<A extends (...args: any[]) => any>(
     });
   };
 }
-function log(a: string, b: number) {
+/* function log(a: string, b: number) {
   console.log(a, b);
   return [a, b] as const;
 }
@@ -28,7 +28,7 @@ debounced123("4", 2);
 debounced123("5", 1);
 debounced123("6", 0);
 debounced123("7", -1);
-debounced123("8", -2);
+debounced123("8", -2); */
 
 /* setTimeout(() => debounced123("3", 6), 600);
 setTimeout(() => debounced123("4", 3), 1000);

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function DateLine() {
   const [date, setDate] = useState<string>("");
   useEffect(() => {
+    setDate(getCurrentDate());
     setInterval(() => {
       setDate(getCurrentDate());
     }, 5000);

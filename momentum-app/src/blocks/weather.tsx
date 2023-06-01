@@ -8,7 +8,7 @@ import {
 import { debounce } from "./debounce";
 import { useDebounce } from "./use-debounce";
 
-//const debounced = debounce(fetchWeather, 300); //debouncing api
+const debounced = debounce(fetchWeather, 300); //debouncing api
 
 export default function Weather() {
   const [city, setCity] = useState("Novi Sad");

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function Time() {
   const [time, setTime] = useState<string>("");
   useEffect(() => {
+    setTime(getCurrentTime());
     setInterval(() => {
       setTime(getCurrentTime());
     }, 1000);
