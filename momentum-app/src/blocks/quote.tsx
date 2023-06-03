@@ -34,7 +34,7 @@ export default function Quote() {
     <>
       <button onClick={clickHandler} className="change-quote"></button>
       <div>
-        <div className="quote">{quote?.quote}</div>
+        <div className="quote">{'"' + quote?.quote + '"'}</div>
         <div className="author">{quote?.author}</div>
       </div>
     </>

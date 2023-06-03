@@ -6,12 +6,14 @@ import Time from "../blocks/time";
 import Greeting from "../blocks/greeting";
 import Slider from "../blocks/slider";
 import Quote from "../blocks/quote";
+import Search from "../blocks/search";
+import ToDO from "../blocks/todo";
 
 export default function Root() {
   return (
     <>
       <header className="header">
-        <div className="player"></div>
+        <div className="search">{Search()}</div>
         <div className="weather">{Weather()}</div>
       </header>
       <main className="main">
@@ -23,7 +25,7 @@ export default function Root() {
       <footer className="footer">
         <div className="settings"></div>
         <div className="quote">{Quote()}</div>
-        <div className="todo"></div>
+        <div className="todo">{ToDO()}</div>
       </footer>
     </>
   );
