@@ -8,6 +8,7 @@ import Slider from "../blocks/slider";
 import Quote from "../blocks/quote";
 import Search from "../blocks/search";
 import ToDO from "../blocks/todo";
+import Settings from "../blocks/settings";
 
 export default function Root() {
   return (
@@ -20,10 +21,12 @@ export default function Root() {
         <div className="slider-icons">{Slider()}</div>
         <div className="time">{Time()}</div>
         <div className="date">{DateLine()}</div>
-        <div className="greeting-container">{Greeting()}</div>
+        <div className="greeting-wrapper">
+          <div className="greeting-container">{Greeting()}</div>
+        </div>
       </main>
       <footer className="footer">
-        <div className="settings"></div>
+        <div className="settings">{Settings()}</div>
         <div className="quote">{Quote()}</div>
         <div className="todo">{ToDO()}</div>
       </footer>

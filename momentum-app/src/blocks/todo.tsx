@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, SyntheticEvent } from "react";
 
 export default function ToDO() {
-  type toDoObject = {
+  interface toDoObject {
     id: string;
     task: string;
     edit: string;
-  };
+  }
   const [incompleteList, setIncompleteList] = useState<toDoObject[]>([]);
   const [completeList, setCompleteList] = useState<toDoObject[]>([]);
   const refNewTask = useRef(null);

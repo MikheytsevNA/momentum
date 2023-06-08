@@ -13,7 +13,7 @@ const debounced = debounce(fetchWeather, 300); //debouncing api
 export default function Weather() {
   const [city, setCity] = useState("Novi Sad");
   const [data, setData] = useState<WeatherResponse | null>(null);
-  const debouncedCity = useDebounce(city, 300); //debouncing city
+  const debouncedCity = useDebounce(city, 300); //debouncing city input
 
   useEffect(() => {
     const getWeatherData = async (city: string) => {

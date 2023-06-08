@@ -34,6 +34,7 @@ body {
 .search {
   display: flex;
   width: 160px;
+  transition: 500ms;
 }
 
 .search-image {
@@ -227,16 +228,19 @@ body {
   margin: 0 0 20px 20px;
 }
 
-.todo-corner {
+.todo {
   display: flex;
   justify-content: flex-end;
   align-items: end;
-  width: 10%;
-  margin: 0 20px 20px 0;
+  margin: 0;
   transition: 500ms;
 }
 
 .settings-icon {
+  position: absolute;
+  cursor: pointer;
+  left: 10px;
+  bottom: 10px;
   width: 25px;
   height: 25px;
   scale: 1;
@@ -248,14 +252,20 @@ body {
 .settings-container {
   position: absolute;
   width: 500px;
-  height: 500px;
-  bottom: 50px;
+  height: 400px;
+  bottom: 40px;
   left: 10px;
-  background: hsla(0deg, 0%, 100%, 0.95);
+  background: #f8f8f8;
   border-radius: 10px;
   color: #212121;
   font-size: 20px;
   transition: 500ms;
+  z-index: 1;
+}
+
+.settings-container_opaque {
+  opacity: 0;
+  z-index: -1;
 }
 
 .opaque {
@@ -264,6 +274,7 @@ body {
 }
 
 .settings-menu {
+  font-weight: 700;
   margin: 20px 0 10px 0;
 }
 
@@ -392,6 +403,7 @@ body {
 .quote {
   z-index: 0;
   min-height: 32px;
+  transition: 500ms;
 }
 
 .author {
@@ -409,7 +421,6 @@ body {
   border: 1px solid #ddd;
   background: #fff;
   border-radius: 6px;
-  font-family: Lato, sans-serif;
   color: #888;
 }
 
@@ -426,6 +437,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 10px;
 }
 
 .list-item > * {
@@ -524,7 +536,6 @@ body {
   border-bottom: 2px solid #333;
   padding: 10px 0 10px;
   margin: 0;
-  text-transform: uppercase;
 }
 
 /* new-task block */
@@ -536,7 +547,6 @@ body {
   border-bottom: 2px solid #333;
   margin: 10px 0 10px;
   padding: 0 0 10px;
-  text-transform: uppercase;
 }
 
 .new-task__text-inputs {
@@ -586,17 +596,19 @@ body {
 
 .todo-menu {
   background-color: #f8f8f8;
-  display: none;
+  border-radius: 10px;
+  opacity: 0;
   position: absolute;
-  right: 0;
+  right: 10px;
   bottom: 40px;
   margin: 0 auto 0;
   z-index: 1;
   min-width: 380px;
+  transition: 500ms;
 }
 
 .todo-menu.todo-menu_active {
-  display: block;
+  opacity: 1;
 }
 
 
