@@ -7,37 +7,25 @@ import {
   BackgroundResponseSuccess,
   BackgroundResponseFail,
 } from "./apiBg";
-
-//const debounced = debounce(fetchBackground, 1000);
-
-export default function Slider() {
-  const [change, setChange] = useState(false);
-  const [background, setBackground] = useState<BackgroundResponse | null>(null);
+type SlideProps = { setBackground: (url: string) => void };
+export default function Slider(props: SlideProps) {
+  const [change, setChange] = useState<boolean | null>(null);
   const debouncedChange = useDebounce(change, 1000); //debouncing change
-  const [imgLoaded, setImgLoaded] = useState("./assets/img/bg.jpg");
   useEffect(() => {
     const tags = ["nature", "evening"];
     const getUrl = async (tags: string[]) => {
       const response = await fetchBackground(tags);
-      setBackground(response);
-      if (background?.succes) {
+      if (response?.succes) {
+        //setImgLoaded(background.url);
         const img = new Image();
-        img.src = background.url;
+        img.src = response.url;
         img.onload = () => {
-          console.log("Img is loaded");
-          setImgLoaded(img.src);
+          props.setBackground(img.src);
         };
       }
     };
-    getUrl(tags);
+    if (debouncedChange !== null) getUrl(tags);
   }, [debouncedChange]);
-
-  useEffect(() => {
-    if (background) {
-      document.body.style.backgroundImage = `url("${imgLoaded}}")`;
-      console.log("Background is changed");
-    }
-  }, [imgLoaded]);
 
   function handleClick(): void {
     setChange(!change);

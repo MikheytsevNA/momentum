@@ -1,6 +1,9 @@
 import { useState, useEffect, SyntheticEvent } from "react";
-
-export default function Settings() {
+type SettingsProps = {
+  timeItem: boolean;
+  setTimeItem: (timeItem: boolean) => void;
+};
+export default function Settings({ timeItem, setTimeItem }: SettingsProps) {
   interface settingsItem {
     id: string;
     className: string;
@@ -24,9 +27,8 @@ export default function Settings() {
     { className: "todo", innerText: "ToDo", visible: true },
     { className: "search", innerText: "Search", visible: true },
   ];
-  const [settingsState, setsettingsState] = useState<settingsItem[]>(
-    applyInitialState(initialState)
-  );
+  const list = applyInitialState(initialState);
+  const [settingsState, setsettingsState] = useState<settingsItem[]>(list);
   function applyInitialState(
     state: Pick<settingsItem, "className" | "innerText" | "visible">[]
   ) {
@@ -44,8 +46,28 @@ export default function Settings() {
   }
 
   function toggleElement(event: SyntheticEvent) {
-    const target: HTMLElement = event.target as HTMLElement;
+    setTimeItem(!timeItem);
+
+    /* const target: HTMLElement = event.target as HTMLElement;
     const parent = target.closest("li")!;
+
+    const parentKey = parent.dataset.key;
+    if (!parentKey) return;
+
+    const settingsStateKeys = settingsState.map(({ id }) => id);
+    if (settingsStateKeys.includes(parentKey)) {
+      console.log(123);
+      const index = settingsStateKeys.indexOf(parentKey);
+      setsettingsState(
+        settingsState.splice(index, 1, {
+          id: settingsState[index].id,
+          className: settingsState[index].className,
+          innerText: settingsState[index].innerText,
+          visible: !settingsState[index].visible,
+        })
+      );
+    }
+
     const elementToChange = document.querySelector(
       // any way to get rid of this selector?
       "." + parent.dataset.element
@@ -62,7 +84,7 @@ export default function Settings() {
         } else {
           elementToChange.style.display = "none";
         }
-      }, 500);
+      }, 500); */
   }
 
   function renderSettingsItems(list: settingsItem[]) {
@@ -97,6 +119,22 @@ export default function Settings() {
   function toggleHandler() {
     setToggleSettings(!toggleSettings);
   }
+
+  addEventListener("beforeunload", (): void => {
+    localStorage.setItem(
+      "settingStateList",
+      JSON.stringify(
+        settingsState.map((item) => {
+          return {
+            className: item.className,
+            innerText: item.innerText,
+            visible: item.visible,
+          };
+        })
+      )
+    );
+  });
+
   return (
     <>
       <div className="settings-corner">
@@ -107,7 +145,24 @@ export default function Settings() {
           }`}
         >
           <div className="settings-menu">General settings</div>
-          <ul className="menu-list">{renderSettingsItems(settingsState)}</ul>
+          <ul className="menu-list">
+            <li key={"123123123"} className="menu-item">
+              <div className="menu-item-style">
+                {"Time"}
+                <label className="toggle">
+                  <input
+                    type="checkbox"
+                    className=""
+                    onChange={toggleElement}
+                    checked={timeItem}
+                  ></input>
+                  <span className="slider"></span>
+                  <span className="labels" data-on="" data-off=""></span>
+                </label>
+              </div>
+            </li>
+            {/* renderSettingsItems(settingsState) */}
+          </ul>
           <div className="show"></div>
         </div>
       </div>

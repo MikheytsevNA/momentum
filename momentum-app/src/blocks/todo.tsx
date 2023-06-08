@@ -6,8 +6,31 @@ export default function ToDO() {
     task: string;
     edit: string;
   }
-  const [incompleteList, setIncompleteList] = useState<toDoObject[]>([]);
-  const [completeList, setCompleteList] = useState<toDoObject[]>([]);
+
+  const incompleteListJSONFromStorage = localStorage.getItem("incompleteList");
+  const completeListJSONFromStorage = localStorage.getItem("completeList");
+
+  let incompleteListFromStorage: [];
+  let completeListFromStorage: [];
+
+  if (!incompleteListJSONFromStorage) {
+    incompleteListFromStorage = [];
+  } else {
+    incompleteListFromStorage = JSON.parse(incompleteListJSONFromStorage);
+  }
+
+  if (!completeListJSONFromStorage) {
+    completeListFromStorage = [];
+  } else {
+    completeListFromStorage = JSON.parse(completeListJSONFromStorage);
+  }
+
+  const [incompleteList, setIncompleteList] = useState<toDoObject[]>(
+    incompleteListFromStorage
+  );
+  const [completeList, setCompleteList] = useState<toDoObject[]>(
+    completeListFromStorage
+  );
   const refNewTask = useRef(null);
 
   function addNewTask() {
@@ -204,6 +227,11 @@ export default function ToDO() {
   function toggleHandler() {
     setToggleMenu(!toggleMenu);
   }
+
+  addEventListener("beforeunload", (): void => {
+    localStorage.setItem("incompleteList", JSON.stringify(incompleteList));
+    localStorage.setItem("completeList", JSON.stringify(completeList));
+  });
 
   return (
     <>

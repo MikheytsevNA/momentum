@@ -5,7 +5,17 @@ export default function Greeting() {
   const [greetings, setGreetings] = useState(
     changeHourToTimeOfDay(greetingsList)
   );
-  const [name, setName] = useState("");
+  const greetingJSONFromStorage = localStorage.getItem("greeting");
+
+  let greetingFromStorage: string;
+
+  if (!greetingJSONFromStorage) {
+    greetingFromStorage = "";
+  } else {
+    greetingFromStorage = JSON.parse(greetingJSONFromStorage);
+  }
+
+  const [name, setName] = useState(greetingFromStorage);
 
   useEffect(() => {
     setInterval(() => {
@@ -17,7 +27,9 @@ export default function Greeting() {
     const target = event.target as HTMLInputElement;
     setName(target.value);
   }
-
+  addEventListener("beforeunload", (): void => {
+    localStorage.setItem("greeting", JSON.stringify(name));
+  });
   return (
     <>
       <div className="greeting">Good {greetings}</div>

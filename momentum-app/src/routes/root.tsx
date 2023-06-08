@@ -11,25 +11,52 @@ import ToDO from "../blocks/todo";
 import Settings from "../blocks/settings";
 
 export default function Root() {
+  const [timeItem, setTimeItem] = useState(true);
+  const [background, setBackground] = useState(
+    localStorage.getItem("backgroundImage") ?? "./src/assets/img/bg.jpg"
+  );
+  function storeAndSetBackground(url: string): void {
+    localStorage.setItem("backgroundImage", url);
+    setBackground(url);
+  }
   return (
-    <>
+    <div
+      className="background"
+      style={{ backgroundImage: `url(${background})` }}
+    >
       <header className="header">
-        <div className="search">{Search()}</div>
-        <div className="weather">{Weather()}</div>
+        <div className="search">
+          <Search></Search>
+        </div>
+        <div className="weather">
+          <Weather></Weather>
+        </div>
       </header>
       <main className="main">
-        <div className="slider-icons">{Slider()}</div>
-        <div className="time">{Time()}</div>
-        <div className="date">{DateLine()}</div>
+        <div className="slider-icons">
+          <Slider setBackground={storeAndSetBackground}></Slider>
+        </div>
+        <div className={"time" + (timeItem ? "" : " opaque")}>{Time()}</div>
+        <div className="date">
+          <DateLine></DateLine>
+        </div>
         <div className="greeting-wrapper">
-          <div className="greeting-container">{Greeting()}</div>
+          <div className="greeting-container">
+            <Greeting></Greeting>
+          </div>
         </div>
       </main>
       <footer className="footer">
-        <div className="settings">{Settings()}</div>
-        <div className="quote">{Quote()}</div>
-        <div className="todo">{ToDO()}</div>
+        <div className="settings">
+          <Settings timeItem={timeItem} setTimeItem={setTimeItem}></Settings>
+        </div>
+        <div className="quote">
+          <Quote></Quote>
+        </div>
+        <div className="todo">
+          <ToDO></ToDO>
+        </div>
       </footer>
-    </>
+    </div>
   );
 }

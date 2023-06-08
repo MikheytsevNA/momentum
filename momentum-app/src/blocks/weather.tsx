@@ -11,7 +11,16 @@ import { useDebounce } from "./use-debounce";
 const debounced = debounce(fetchWeather, 300); //debouncing api
 
 export default function Weather() {
-  const [city, setCity] = useState("Novi Sad");
+  const cityJSONFromStorage = localStorage.getItem("city");
+
+  let cityFromStorage: string;
+
+  if (!cityJSONFromStorage) {
+    cityFromStorage = "Novi Sad";
+  } else {
+    cityFromStorage = JSON.parse(cityJSONFromStorage);
+  }
+  const [city, setCity] = useState(cityFromStorage);
   const [data, setData] = useState<WeatherResponse | null>(null);
   const debouncedCity = useDebounce(city, 300); //debouncing city input
 
@@ -27,6 +36,10 @@ export default function Weather() {
     const target = e.target as HTMLInputElement;
     setCity(target.value);
   }
+
+  addEventListener("beforeunload", (): void => {
+    localStorage.setItem("city", JSON.stringify(city));
+  });
 
   return (
     <i>
