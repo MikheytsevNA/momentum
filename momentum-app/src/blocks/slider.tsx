@@ -1,16 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import { debounce } from "./debounce";
-import { useDebounce } from "./use-debounce";
-import {
-  fetchBackground,
-  BackgroundResponse,
-  BackgroundResponseSuccess,
-  BackgroundResponseFail,
-} from "./apiBg";
+import { useThrottle } from "./use-throttle";
+import { fetchBackground } from "./apiBg";
 type SlideProps = { setBackground: (url: string) => void };
 export default function Slider(props: SlideProps) {
   const [change, setChange] = useState<boolean | null>(null);
-  const debouncedChange = useDebounce(change, 1000); //debouncing change
+  const throttledChange = useThrottle(change, 3000); //throttle change
   useEffect(() => {
     const tags = ["nature", "evening"];
     const getUrl = async (tags: string[]) => {
@@ -24,8 +19,8 @@ export default function Slider(props: SlideProps) {
         };
       }
     };
-    if (debouncedChange !== null) getUrl(tags);
-  }, [debouncedChange]);
+    if (throttledChange !== null) getUrl(tags);
+  }, [throttledChange]);
 
   function handleClick(): void {
     setChange(!change);
