@@ -11,7 +11,27 @@ import ToDO from "../blocks/todo";
 import Settings from "../blocks/settings";
 
 export default function Root() {
-  const [timeItem, setTimeItem] = useState(true);
+  const [settings, setSettings] = useState(() => {
+    const storeSettings = localStorage.getItem("settings");
+    if (storeSettings) {
+      return JSON.parse(storeSettings);
+    } else {
+      return {
+        time: true,
+        date: true,
+        greeting: true,
+        quote: true,
+        weather: true,
+        todo: true,
+        search: true,
+      };
+    }
+  });
+  function storeAndSetSettings(setting: { [key: string]: boolean }): void {
+    localStorage.setItem("settings", JSON.stringify(setting));
+    setSettings(setting);
+  }
+
   const [background, setBackground] = useState(
     localStorage.getItem("backgroundImage") ?? "./src/assets/img/bg.jpg"
   );
@@ -25,10 +45,10 @@ export default function Root() {
       style={{ backgroundImage: `url(${background})` }}
     >
       <header className="header">
-        <div className="search">
+        <div className={"search" + (settings.search ? "" : " opaque")}>
           <Search></Search>
         </div>
-        <div className="weather">
+        <div className={"weather" + (settings.weather ? "" : " opaque")}>
           <Weather></Weather>
         </div>
       </header>
@@ -36,11 +56,15 @@ export default function Root() {
         <div className="slider-icons">
           <Slider setBackground={storeAndSetBackground}></Slider>
         </div>
-        <div className={"time" + (timeItem ? "" : " opaque")}>{Time()}</div>
-        <div className="date">
+        <div className={"time" + (settings.time ? "" : " opaque")}>
+          <Time></Time>
+        </div>
+        <div className={"date" + (settings.date ? "" : " opaque")}>
           <DateLine></DateLine>
         </div>
-        <div className="greeting-wrapper">
+        <div
+          className={"greeting-wrapper" + (settings.greeting ? "" : " opaque")}
+        >
           <div className="greeting-container">
             <Greeting></Greeting>
           </div>
@@ -48,12 +72,15 @@ export default function Root() {
       </main>
       <footer className="footer">
         <div className="settings">
-          <Settings timeItem={timeItem} setTimeItem={setTimeItem}></Settings>
+          <Settings
+            settings={settings}
+            setSettings={storeAndSetSettings}
+          ></Settings>
         </div>
-        <div className="quote">
+        <div className={"quote" + (settings.quote ? "" : " opaque")}>
           <Quote></Quote>
         </div>
-        <div className="todo">
+        <div className={"todo" + (settings.todo ? "" : " opaque")}>
           <ToDO></ToDO>
         </div>
       </footer>

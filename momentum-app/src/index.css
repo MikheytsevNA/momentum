@@ -10,21 +10,18 @@
 }
 
 body {
-  min-width: 480px;
+  min-width: 350px;
   min-height: 100vh;
   font-family: "Arial", sans-serif;
   font-size: 16px;
   color: #fff;
   text-align: center;
-  /* background: url("./assets/img/bg.jpg") center/cover, rgba(0, 0, 0, 0.5); */
-  transition: background-image 1s ease-in-out;
-  background-size: 100vw 100vh;
 }
 
 .background {
-  width: 100vw;
   height: 100vh;
   background-size: 100vw 100vh;
+  transition: background-image 1s ease-in-out;
 }
 
 .header {
@@ -51,21 +48,21 @@ body {
 .search-input {
   color: white;
   font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.0);
+  background-color: rgba(255, 255, 255, 0);
   border: none;
 }
 
 .search-input:hover {
-  border-bottom: solid #C6C6C6 ;
+  border-bottom: solid #c6c6c6;
 }
 
 .search-input:focus {
   outline: none;
-  border-bottom: solid #fff ;
+  border-bottom: solid #fff;
 }
 
 .item-active::before {
-  color: #C5B358;
+  color: #c5b358;
 }
 
 .slider-icon,
@@ -187,6 +184,10 @@ body {
   transition: 500ms;
 }
 
+.greeting-wrapper {
+  transition: 500ms;
+}
+
 .greeting-container {
   display: flex;
   flex-wrap: wrap;
@@ -195,7 +196,6 @@ body {
   min-height: 48px;
   width: 100vw;
   font-size: 40px;
-  transition: 500ms;
 }
 
 .greeting {
@@ -257,7 +257,8 @@ body {
 
 .settings-container {
   position: absolute;
-  width: 500px;
+  width: auto;
+  min-width: 320px;
   height: 400px;
   bottom: 40px;
   left: 10px;
@@ -418,14 +419,15 @@ body {
   min-height: 20px;
 }
 
-
 /* task block */
 .task__text-inputs {
   margin: 0;
   font-size: 18px;
   line-height: 18px;
-  height: 21px;
+  min-height: 21px;
   padding: 0 10px;
+  overflow: hidden;
+  word-break: break-all;
   border: 1px solid #ddd;
   background: #fff;
   border-radius: 6px;
@@ -438,6 +440,8 @@ body {
 
 .task__text-labels {
   padding: 0 10px;
+  overflow: hidden;
+  word-break: break-all;
 }
 
 /* list-item block */
@@ -454,6 +458,8 @@ body {
 
 /* Edit Task */
 .list-item .task__text-inputs {
+  word-break: break-all;
+  overflow: hidden;
   display: none;
 }
 
@@ -542,6 +548,7 @@ body {
   font-weight: 700;
   font-size: 15px;
   border-bottom: 2px solid #333;
+  border-radius: 0 0 10px 10px;
   padding: 10px 0 10px;
   margin: 0;
 }
@@ -618,7 +625,6 @@ body {
 .todo-menu.todo-menu_active {
   opacity: 1;
 }
-
 
 @media (max-width: 768px) {
   .time {

@@ -25,6 +25,8 @@ export default function ToDO() {
     completeListFromStorage = JSON.parse(completeListJSONFromStorage);
   }
 
+  const [addTask, SetAddTask] = useState("");
+
   const [incompleteList, setIncompleteList] = useState<toDoObject[]>(
     incompleteListFromStorage
   );
@@ -32,6 +34,11 @@ export default function ToDO() {
     completeListFromStorage
   );
   const refNewTask = useRef(null);
+
+  function addTaskHandler(event: SyntheticEvent) {
+    const target = event.target as HTMLInputElement;
+    SetAddTask(target.value);
+  }
 
   function addNewTask() {
     const target = refNewTask.current as HTMLInputElement | null;
@@ -43,7 +50,7 @@ export default function ToDO() {
       ...current,
       { id: uuid, task: target.value, edit: "" },
     ]);
-    //target.value = "";
+    SetAddTask("");
   }
 
   function deleteButtonHandler(event: SyntheticEvent) {
@@ -249,6 +256,8 @@ export default function ToDO() {
               className="new-task__text-inputs"
               type="text"
               ref={refNewTask}
+              value={addTask}
+              onChange={addTaskHandler}
             ></input>
             <button className="new-task__buttons" onClick={addNewTask}>
               Add
