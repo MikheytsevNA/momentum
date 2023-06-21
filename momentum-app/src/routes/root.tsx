@@ -24,10 +24,13 @@ export default function Root() {
         weather: true,
         todo: true,
         search: true,
+        API: { host: "unsplash", tags: ["nature", "evening"] },
       };
     }
   });
-  function storeAndSetSettings(setting: { [key: string]: boolean }): void {
+  function storeAndSetSettings(setting: {
+    [key: string]: boolean | { host: string; tags: string[] };
+  }): void {
     localStorage.setItem("settings", JSON.stringify(setting));
     setSettings(setting);
   }
@@ -54,7 +57,10 @@ export default function Root() {
       </header>
       <main className="main">
         <div className="slider-icons">
-          <Slider setBackground={storeAndSetBackground}></Slider>
+          <Slider
+            setBackground={storeAndSetBackground}
+            sliderSettings={settings.API}
+          ></Slider>
         </div>
         <div className={"time" + (settings.time ? "" : " opaque")}>
           <Time></Time>

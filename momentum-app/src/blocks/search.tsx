@@ -15,19 +15,14 @@ export default function Search() {
   }
   return (
     <>
-      <div className="search">
-        <img
-          className="search-image"
-          src="/src/assets/svg/search.svg"
-          alt="search icon"
-        ></img>
-        <input
-          type="text"
-          className="search-input"
-          onChange={handleChange}
-          onKeyDown={handleEnterPress}
-        ></input>
-      </div>
+      <label className="search-image" htmlFor="search-input"></label>
+      <input
+        type="text"
+        id="search-input"
+        className="search-input"
+        onChange={handleChange}
+        onKeyDown={handleEnterPress}
+      ></input>
     </>
   );
 }

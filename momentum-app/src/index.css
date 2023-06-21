@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: "Arial-MT";
-  src: url("./assets/fonts/Arial-MT.woff"); /* Путь к файлу со шрифтом */
+  src: url("./assets/fonts/Arial-MT.woff");
 }
 * {
   box-sizing: border-box;
@@ -36,7 +36,7 @@ body {
 
 .search {
   display: flex;
-  width: 160px;
+  width: auto;
   transition: 500ms;
 }
 
@@ -158,6 +158,18 @@ body {
   cursor: pointer;
 }
 
+.search-image {
+  width: 32px;
+  height: 32px;
+  background-image: url("./assets/svg/search.svg");
+  background-size: 32px 32px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
 .slide-prev {
   left: 20px;
   background-image: url("./assets/svg/slider-prev.svg");
@@ -259,7 +271,7 @@ body {
 .settings-container {
   position: absolute;
   width: auto;
-  min-width: 320px;
+  min-width: 350px;
   height: 400px;
   bottom: 40px;
   left: 10px;
@@ -283,9 +295,30 @@ body {
   height: 0;
 }
 
-.settings-menu {
+.settings-pages {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 10px 0 0 0;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.settings-pages_opaque {
+  display: none;
+}
+
+.settings-pages__item {
+  cursor: pointer;
+}
+
+.settings-pages__item_focused {
   font-weight: 700;
-  margin: 20px 0 10px 0;
+}
+
+.settings-title {
+  font-weight: 700;
+  margin: 10px 0 10px 0;
 }
 
 .menu-list {
@@ -315,7 +348,7 @@ body {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: var(--height);
   cursor: pointer;
-  margin: 10px 0 10px 50px;
+  margin: 7px 0 7px 50px;
 }
 
 .toggle input {
@@ -391,6 +424,49 @@ body {
 
 .toggle input:checked ~ .labels::before {
   opacity: 1;
+}
+
+.api-settings_choices {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 10px 0;
+  border-bottom: 2px solid #333;
+  border-radius: 0 0 10px 10px;
+}
+
+.api-settings_choices {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.api-settings_choice_chosen {
+  font-weight: 700;
+}
+
+.api-settings_tags {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 0 0;
+  padding: 0 0 10px 0;
+  border-bottom: 2px solid #333;
+  border-radius: 0 0 10px 10px;
+}
+
+.tags-input {
+  margin: 10px 5px 0 5px;
+  font-size: 18px;
+  line-height: 18px;
+  height: 21px;
+  padding: 0 0 0 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  font-family: Lato, sans-serif;
+  color: #888;
+}
+
+.tags-input:focus {
+  color: #333;
 }
 
 .footer-container {

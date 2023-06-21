@@ -2,14 +2,18 @@
 import { useState, useEffect } from "react";
 import { useThrottle } from "./use-throttle";
 import { fetchBackground } from "./apiBg";
-type SlideProps = { setBackground: (url: string) => void };
+type SlideProps = {
+  setBackground: (url: string) => void;
+  sliderSettings: { host: string; tags: string[] };
+};
 export default function Slider(props: SlideProps) {
   const [change, setChange] = useState<boolean | null>(null);
   const throttledChange = useThrottle(change, 3000); //throttle change
   useEffect(() => {
-    const tags = ["nature", "evening"];
+    const tags = props.sliderSettings.tags;
+    const host = props.sliderSettings.host;
     const getUrl = async (tags: string[]) => {
-      const response = await fetchBackground(tags);
+      const response = await fetchBackground(host, tags);
       if (response?.succes) {
         //setImgLoaded(background.url);
         const img = new Image();
