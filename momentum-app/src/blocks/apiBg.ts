@@ -1,4 +1,4 @@
-import "../assets/img/bg.jpg";
+import imgUrl from "../assets/img/bg.jpg";
 
 export type BackgroundResponseSuccess = {
   succes: true;
@@ -7,12 +7,18 @@ export type BackgroundResponseSuccess = {
 
 export type BackgroundResponseFail = {
   succes: false;
-  url: "./assets/img/bg.jpg";
+  url: string;
 };
 
 export type BackgroundResponse =
   | BackgroundResponseSuccess
   | BackgroundResponseFail;
+
+function getRandomInt(min: number, max: number): number {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
 
 export async function fetchBackground(
   host: string,
@@ -35,14 +41,17 @@ export async function fetchBackground(
     const response = await fetch(url);
     const result = await response.json();
     if (!response.ok) {
-      return { succes: false, url: "./assets/img/bg.jpg" };
+      return { succes: false, url: imgUrl };
     }
     if (host === "unsplash") {
       return { succes: true, url: result.urls.raw };
     } else {
-      return { succes: true, url: result.photos.photo[0].url_l };
+      return {
+        succes: true,
+        url: result.photos.photo[getRandomInt(0, 100)].url_l,
+      };
     }
   } catch {
-    return { succes: false, url: "./assets/img/bg.jpg" };
+    return { succes: false, url: imgUrl };
   }
 }

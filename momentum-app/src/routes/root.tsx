@@ -9,6 +9,7 @@ import Quote from "../blocks/quote";
 import Search from "../blocks/search";
 import ToDO from "../blocks/todo";
 import Settings from "../blocks/settings";
+import imgUrl from "../assets/img/bg.jpg";
 
 export default function Root() {
   const [settings, setSettings] = useState(() => {
@@ -36,7 +37,7 @@ export default function Root() {
   }
 
   const [background, setBackground] = useState(
-    localStorage.getItem("backgroundImage") ?? "./src/assets/img/bg.jpg"
+    localStorage.getItem("backgroundImage") ?? imgUrl
   );
   function storeAndSetBackground(url: string): void {
     localStorage.setItem("backgroundImage", url);
