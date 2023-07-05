@@ -1,23 +1,18 @@
 import { useState, useEffect } from "react";
+import Qoutes from "./../assets/data_en.json";
 
 export default function Quote() {
-  type Quote = { quote: ""; author: "" };
+  type Quote = { quote: string; author: string };
   const [quote, setQuote] = useState<Quote | null>(null);
   const [change, setChange] = useState(false);
 
   useEffect(() => {
-    async function fetchQuote() {
-      const url = "/src/assets/data_en.json";
-      const response = await fetch(url);
-      const result = await response.json();
-      return result;
-    }
     async function getQuote() {
-      const quotes = await fetchQuote();
-      const randomNumber = randomNumberInRange(0, quotes.quotes.length - 1);
+      const quotes = await Qoutes.quotes;
+      const randomNumber = randomNumberInRange(0, quotes.length - 1);
       setQuote({
-        quote: quotes.quotes[randomNumber].quote,
-        author: quotes.quotes[randomNumber].author,
+        quote: quotes[randomNumber].quote,
+        author: quotes[randomNumber].author,
       });
     }
     getQuote();
