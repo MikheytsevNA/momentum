@@ -4,8 +4,9 @@
 logs
 **/*.backup.*
 **/*.back.*
+package-lock.json
 
-momentum-app/node_modules
+momentum-app
 bower_components
 
 *.sublime*
