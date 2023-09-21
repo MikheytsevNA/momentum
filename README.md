@@ -10,4 +10,4 @@ Tech stack: React.ts. Focus on different api interractions - weather, wallpapers
 
 ## Deploy
 
-Deploy is [here](https://mikheytsevna.github.io/momentum/dist/)
+Deploy is [here](mikheytsevna-momentumapp.netlify.app)
