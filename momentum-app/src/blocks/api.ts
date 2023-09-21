@@ -14,7 +14,9 @@ export type WeatherResponseFail = {
 
 export type WeatherResponse = WeatherResponseOK | WeatherResponseFail;
 export async function fetchWeather(city: string): Promise<WeatherResponse> {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&appid=fb26b11c999e74ec5b65b111dd9e56dc&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&appid=${
+    import.meta.env.VITE_WEATHER_API
+  }&units=metric`;
   try {
     const response = await fetch(url);
     const result = await response.json();

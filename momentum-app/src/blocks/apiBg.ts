@@ -28,11 +28,13 @@ export async function fetchBackground(
   if (host === "unsplash") {
     url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tags.join(
       ","
-    )}&client_id=H78x--JRWchCa9VEOaZTgrfEcOUILiBDe-y7KKhJprg&fm=jpg`;
+    )}&client_id=${import.meta.env.VITE_UNSPLASH_API}=jpg`;
   } else if (host === "flickr") {
-    url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=6c98cf9bd1f00ccb39f492e628064257&tags=${tags.join(
+    url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${
+      import.meta.env.VITE_FLICKR_API
+    }&tags=${tags.join(
       ","
-    )}&extras=url_l&format=json&nojsoncallback=1`;
+    )}&tag-mode=AND&extras=url_o&content_types=0&format=json&nojsoncallback=1`;
   } else {
     throw new Error("Something went wrong");
   }
@@ -48,7 +50,9 @@ export async function fetchBackground(
     } else {
       return {
         succes: true,
-        url: result.photos.photo[getRandomInt(0, 100)].url_l,
+        url: result.photos.photo.filter(
+          (image: { width_o: string }) => Number.parseInt(image.width_o) >= 1440
+        )[getRandomInt(0, 100)].url_o,
       };
     }
   } catch {
