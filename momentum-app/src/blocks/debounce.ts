@@ -3,7 +3,7 @@ export function debounce<A extends (...args: any[]) => any>(
   func: A,
   delay = 300
 ) {
-  let timer: NodeJS.Timeout;
+  let timer: number;
   return function (...arg: Parameters<A>) {
     return new Promise<ReturnType<A>>((resolve) => {
       //pending promises are not deleted

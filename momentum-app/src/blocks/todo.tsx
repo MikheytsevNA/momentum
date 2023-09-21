@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, SyntheticEvent } from "react";
+import deleteButton from "/src/assets/svg/remove.svg";
 
 export default function ToDO() {
   interface toDoObject {
@@ -217,7 +218,7 @@ export default function ToDO() {
             onClick={deleteButtonHandler}
           >
             <img
-              src="/src/assets/svg/remove.svg"
+              src={deleteButton}
               className="remove-button-img"
               alt="Remove"
             ></img>
